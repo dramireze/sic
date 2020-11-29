@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp">
+
+    <body>
+        <ui:composition template="../templateSIC.xhtml">
+            <ui:define name="content">
+                <ezcomp:cabecera />
+                <div id="formulario">
+                    <h:form id="formularioEncuestas">
+                        <p:panel header="#{msg['sistemaencuestas.panelPrincipal']}"> 
+                            <p:messages id="mensajes" />
+                            <br />
+                            <br />
+                            <h:outputText value="Bienvenido #{encuestasController.nombreUsuario}, por favor seleccione una opción:" />
+                            <br />
+                            <br />
+                            <div align="center">
+                                <p:panelGrid columns="2" >                         
+                                    <p:panel id="registrarEncuesta" header="#{msg['sistemaencuestas.registrarEncuesta']}">
+                                        <center>
+                                            <h:graphicImage library="images" name="add-survey.jpg" />
+                                            <br />
+                                            <h:commandLink action="#{encuestasController.inicializarRegistrar}"
+                                                           value="#{msg['sistemaencuestas.registrarEncuesta']}"
+                                                           ajax="false"/>
+                                        </center>                               
+                                    </p:panel>
+                                    <p:panel id="consultarEncuestas" header="#{msg['sistemaencuestas.consultarEncuestas']}">
+                                        <center>
+                                            <h:graphicImage library="images" name="get-survey.jpg" />
+                                            <br />
+                                             <h:commandLink action="#{encuestasController.inicializarConsultar}"
+                                                           value="#{msg['sistemaencuestas.consultarEncuestas']}"
+                                                           ajax="false" />
+                                        </center>                                    
+                                    </p:panel>
+                                </p:panelGrid>
+                                <br />
+                            </div>
+                        </p:panel>    
+                    </h:form>
+                    <h:form id="formularioSalir" style="text-align: center">
+                        <h:outputText value="#{msg['sistemaencuestas.usuario']}: #{encuestasController.nombreUsuario} | " />
+                        <h:commandLink action="#{encuestasController.salir}" value="#{msg['sistemaencuestas.salir']}" />
+                    </h:form>
+                    <p:dialog widgetVar="statusDialog"
+                              modal="true"
+                              draggable="false"
+                              closable="false"
+                              resizable="false" 
+                              header="#{msg['sistemaencuestas.procesando']}"
+                              style="font-size: 12px">
+                        <p:graphicImage id="modalCargando" library="images" name="ajax-loader.gif" />
+                    </p:dialog> 
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

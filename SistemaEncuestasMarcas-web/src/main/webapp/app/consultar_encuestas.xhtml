@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+     <body>
+        <ui:composition template="../templateSIC.xhtml">
+            <ui:define name="content">
+                <ezcomp:cabecera />
+                <div id="formulario">
+                    <h:form id="formularioConsulta">
+                        <br />
+                        <br />
+                        <p:dataTable id="tablaEncuestas" value="#{encuestasController.encuestas}" var="_encuesta" paginator="true" rows="7" paginatorPosition="bottom" styleClass="el" emptyMessage="#{msg['sistemaencuestas.noExisteInformacion']}">                   
+                            <f:facet name="header">  
+                                En total hay #{fn:length(encuestasController.encuestas)} encuestas diligenciadas.  
+                            </f:facet> 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg['sistemaencuestas.numeroDocumento']}" />
+                                </f:facet>
+                                <h:outputText value="#{_encuesta.numeroDocumento}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg['sistemaencuestas.email']}" />
+                                </f:facet>
+                                <h:outputText value="#{_encuesta.email}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg['sistemaencuestas.marcaFavoritaPC']}" />
+                                </f:facet>
+                                <h:outputText value="#{_encuesta.marcaFavoritaPc.nombre}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg['sistemaencuestas.comentarios']}" />
+                                </f:facet>
+                                <h:outputText value="#{_encuesta.comentarios}" />
+                            </p:column> 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg['sistemaencuestas.fechaCreacion']}" />
+                                </f:facet>
+                                <h:outputText value="#{_encuesta.fechaCreacion}">
+                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column width="100">   
+                                <p:commandLink onclick="cnfDlg.show()" update="@all" action="#{encuestasController.inicializarEliminar(_encuesta)}">
+                                    <h:graphicImage library="images" name="icoEliminar.png" title="#{msg['sistemaencuestas.eliminar']}"  />
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                        <br />
+                        <p:confirmDialog widgetVar="cnfDlg" header="#{msg['sistemaencuestas.confirmacion']}" message="#{msg['sistemaencuestas.confirmacionEliminar']}" >
+                            <p:commandButton value="Si" actionListener="#{encuestasController.eliminar()}" oncomplete="cnfDlg.hide();" update="formularioConsulta"/>
+                            <p:commandButton value="No" onclick="cnfDlg.hide();"/>
+                        </p:confirmDialog>
+                    </h:form>
+                    <br />
+                    <h:form id="formularioSalir" style="text-align: center">
+                        <h:outputText value="#{msg['sistemaencuestas.usuario']}: #{encuestasController.nombreUsuario} | " />
+                        <h:commandLink action="#{encuestasController.salir}" value="#{msg['sistemaencuestas.salir']}" />
+                    </h:form>
+                    <p:dialog widgetVar="statusDialog"
+                              modal="true"
+                              draggable="false"
+                              closable="false"
+                              resizable="false" 
+                              header="#{msg['sistemaencuestas.procesando']}"
+                              style="font-size: 12px">
+                        <p:graphicImage id="modalCargando" library="images" name="ajax-loader.gif" />
+                    </p:dialog>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

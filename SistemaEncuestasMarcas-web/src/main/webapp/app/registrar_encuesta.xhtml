@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+     <body>
+        <ui:composition template="../templateSIC.xhtml">
+            <ui:define name="content">
+                <ezcomp:cabecera />
+                <div id="formulario">
+                    <h:form id="formularioRegistrarEncuesta">
+                        <p:panel header="#{msg['sistemaencuestas.registrarEncuesta']}"> 
+                            <p:messages id="mensajes" />
+                            <h:panelGrid columns="2" >
+                                <h:outputText value="#{msg['sistemaencuestas.numeroDocumento']}:" styleClass="requiredLbl" />
+                                <p:inputText  id="numeroDocumento" value="#{encuestasController.encuestaARegistrar.numeroDocumento}" size="20" />
+   
+                                <h:outputText value="#{msg['sistemaencuestas.email']}:" styleClass="requiredLbl" />
+                                <p:inputText  id="email" value="#{encuestasController.encuestaARegistrar.email}" size="20" />
+                                
+                                <h:outputLabel value="#{msg['sistemaencuestas.marcaFavoritaPC']}:" for="marcaFavoritaPC" styleClass="requiredLbl" />
+                                <p:selectOneMenu id="marcaFavoritaPC" value="#{encuestasController.encuestaARegistrar.marcaFavoritaPc}" converter="marcaConverter">
+                                    <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                    <f:selectItems value="#{encuestasController.marcas}"
+                                                   var="marca"
+                                                   itemLabel="#{marca.nombre}"
+                                                   itemValue="#{marca.id}" />
+                                </p:selectOneMenu>
+                                
+                                <h:outputLabel value="#{msg['sistemaencuestas.comentarios']}:"
+                                               for="comentarios"  styleClass="optionalLbl"/>
+                                <p:inputTextarea id="comentarios" 
+                                                 rows="3"
+                                                 cols="27"
+                                                 maxlength="150"
+                                                 autoResize="false"
+                                                 label="#{msg['sistemaencuestas.comentarios']}"
+                                                 value="#{encuestasController.encuestaARegistrar.comentarios}" />
+                            </h:panelGrid>
+                            <br />
+                            <p:commandButton id="registrar"
+                                             value="#{msg['sistemaencuestas.registrarEncuesta']}"
+                                             action="#{encuestasController.registrarEncuesta}"
+                                             update="formularioRegistrarEncuesta"
+                                             style="float: right" />
+                            <p:commandButton id="cancelar"
+                                             value="#{msg['sistemaencuestas.cancelar']}"
+                                             ajax="false"
+                                             action="#{encuestasController.cancelar}"
+                                             style="float: right" />
+                            <br /><br />
+                        </p:panel>               
+                    </h:form>
+                    <h:form id="formularioSalir" style="text-align: center">
+                        <h:outputText value="#{msg['sistemaencuestas.usuario']}: #{encuestasController.nombreUsuario} | " />
+                        <h:commandLink action="#{encuestasController.salir}" value="#{msg['sistemaencuestas.salir']}" />
+                    </h:form>
+                    <p:dialog widgetVar="statusDialog"
+                              modal="true"
+                              draggable="false"
+                              closable="false"
+                              resizable="false" 
+                              header="#{msg['sistemaencuestas.procesando']}"
+                              style="font-size: 12px">
+                        <p:graphicImage id="modalCargando" library="images" name="ajax-loader.gif" />
+                    </p:dialog> 
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

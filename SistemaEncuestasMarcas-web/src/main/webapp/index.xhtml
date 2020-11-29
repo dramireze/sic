@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp">
+    
+    <body>
+        <ui:composition template="./templateSIC.xhtml">
+            <ui:define name="content">
+                <ezcomp:cabecera />
+                <ezcomp:modal_cargando />
+                <h:form id="formulario">
+                    <p:panel header="#{msg['sistemaencuestas.login']}">
+                        <p:messages id="messages" autoUpdate="true"/> 
+                        <div align="center">
+                            <h:panelGrid id="cajas" columns="3">
+                                <h:outputText value="#{msg['sistemaencuestas.usuario']}:" styleClass="requiredLbl" />                        
+                                <p:inputText id="usuario" value="#{loginController.username}"  required="true" requiredMessage="#{msg['sistemaencuestas.campoRequerido']}" />                                                                    
+                                <p:message id="iconMessageusuario" for="usuario" display="icon" />  
+                                <h:outputText value="#{msg['sistemaencuestas.password']}:" styleClass="requiredLbl" />  
+                                <p:password id="password" value="#{loginController.password}" required="true" requiredMessage="#{msg['sistemaencuestas.campoRequerido']}" />
+                                <p:message id="iconMessagepass" for="password" display="icon" />                              
+                                <h:panelGroup />
+                                <p:commandButton value="#{msg['sistemaencuestas.entrar']}" action="#{loginController.validarUsuario()}" />
+                            </h:panelGrid>                     
+                        </div>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
