@@ -22,9 +22,14 @@ public class MarcaFacade extends AbstractFacade<Marca> implements MarcaFacadeLoc
         super(Marca.class);
     }
     
-    public Marca findByName(String name) {
+    public Marca findById(String id) {
+        return (Marca) em.createNamedQuery("Marca.findById")
+            .setParameter("id", id).getSingleResult();
+    }
+    
+    public Marca findByName(String nombre) {
         return (Marca) em.createNamedQuery("Marca.findByNombre")
-            .setParameter("nombre", name).getSingleResult();
+            .setParameter("nombre", nombre).getSingleResult();
     }
     
 }

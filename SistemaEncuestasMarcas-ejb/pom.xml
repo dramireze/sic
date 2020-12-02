@@ -16,20 +16,20 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.18</version>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.5.0</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
         </dependency>
         <dependency>
             <groupId>co.gov.sic.oti</groupId>
@@ -43,10 +43,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -77,7 +77,7 @@
                                 <artifactItem>
                                     <groupId>javax</groupId>
                                     <artifactId>javaee-endorsed-api</artifactId>
-                                    <version>6.0</version>
+                                    <version>7.0</version>
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>

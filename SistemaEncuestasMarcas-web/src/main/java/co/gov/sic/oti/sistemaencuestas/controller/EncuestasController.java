@@ -5,7 +5,6 @@ import co.gov.sic.oti.sistemaencuestas.ejb.MarcaFacade;
 import co.gov.sic.oti.sistemaencuestas.entity.Encuesta;
 import co.gov.sic.oti.sistemaencuestas.entity.Marca;
 import co.gov.sic.oti.sistemaencuestas.entity.Usuario;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -83,6 +82,7 @@ public class EncuestasController {
      */
     public String inicializarRegistrar() {
         encuestaARegistrar = new Encuesta();
+        encuestaARegistrar.setMarcaFavoritaPc(new Marca());
         return "registrar_encuesta";
     }
     
@@ -91,9 +91,8 @@ public class EncuestasController {
      * @return 
      */
     public String registrarEncuesta() {
-        encuestaARegistrar.setFechaCreacion(new Date());
         encuestaARegistrar.setUsuarioCreacion(new Usuario(username));
-        encuestaEJB.create(encuestaARegistrar);
+        encuestaEJB.crearEncuesta(encuestaARegistrar);
         generarMensaje("La encuesta ha sido creada correctamente.", FacesMessage.SEVERITY_INFO, null);
         return "encuestas";
     }

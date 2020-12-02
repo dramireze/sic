@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "encuesta")
+@Table(name = "public.encuesta")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Encuesta.findAll", query = "SELECT e FROM Encuesta e"),

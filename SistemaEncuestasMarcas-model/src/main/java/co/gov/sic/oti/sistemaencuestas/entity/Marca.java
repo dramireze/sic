@@ -14,12 +14,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Sebastián
- */
 @Entity
-@Table(name = "marca")
+@Table(name = "public.marca")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Marca.findAll", query = "SELECT m FROM Marca m"),

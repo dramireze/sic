@@ -23,7 +23,7 @@
                                 <p:inputText  id="email" value="#{encuestasController.encuestaARegistrar.email}" size="20" />
                                 
                                 <h:outputLabel value="#{msg['sistemaencuestas.marcaFavoritaPC']}:" for="marcaFavoritaPC" styleClass="requiredLbl" />
-                                <p:selectOneMenu id="marcaFavoritaPC" value="#{encuestasController.encuestaARegistrar.marcaFavoritaPc}" converter="marcaConverter">
+                                <p:selectOneMenu id="marcaFavoritaPC" value="#{encuestasController.encuestaARegistrar.marcaFavoritaPc.id}">
                                     <f:selectItem itemLabel="Seleccione" itemValue="" />
                                     <f:selectItems value="#{encuestasController.marcas}"
                                                    var="marca"
